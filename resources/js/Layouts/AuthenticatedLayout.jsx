@@ -10,14 +10,14 @@ export default function AuthenticatedLayout({ header, children }) {
         useState(false);
 
     return (
-        <div className="min-h-screen bg-gray-100">
-            {/* Navbar Horizontal */}
-            <nav className="bg-white border-b border-gray-100">
-                <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div className="flex flex-col min-h-screen bg-gray-100">
+            {/* Navbar Horizontal - Fixed Height */}
+            <nav className="flex-shrink-0 bg-white border-b border-gray-100">
+                <div className="max-w-full px-4 mx-auto sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-16">
                         <div className="flex items-center gap-20">
                             <Link href="/">
-                                <h1 className="mb-4 text-2xl font-semibold text-gray-800">
+                                <h1 className="text-xl font-semibold text-gray-800 sm:text-2xl">
                                     SIMSCI
                                 </h1>
                             </Link>
@@ -116,145 +116,175 @@ export default function AuthenticatedLayout({ header, children }) {
                 <div
                     className={`${
                         showingNavigationDropdown ? "block" : "hidden"
-                    } sm:hidden`}
+                    } sm:hidden border-t border-gray-200 bg-white shadow-lg`}
                 >
-                    <div className="flex items-center justify-between pb-1 border-b border-gray-200 item">
-                        <ResponsiveNavLink href={route("profile.edit")}>
-                            <div className="">
-                                <div className="text-base font-medium text-gray-800">
-                                    {user.name}
+                    {/* User Info Section */}
+                    <div className="px-4 py-3 border-b border-gray-200 bg-gray-50">
+                        <div className="flex items-center justify-between">
+                            <ResponsiveNavLink
+                                href={route("profile.edit")}
+                                className="flex items-center flex-1 min-w-0 p-2 space-x-3 transition-colors duration-200 rounded-lg hover:bg-gray-100"
+                            >
+                                <div className="flex-shrink-0">
+                                    <div className="flex items-center justify-center w-8 h-8 bg-blue-600 rounded-full">
+                                        <span className="text-sm font-medium text-white">
+                                            {user.name.charAt(0).toUpperCase()}
+                                        </span>
+                                    </div>
                                 </div>
-                                <div className="text-sm font-medium text-gray-500">
-                                    {user.email}
+                                <div className="flex-1 min-w-0">
+                                    <div className="text-sm font-medium text-gray-900 truncate">
+                                        {user.name}
+                                    </div>
+                                    <div className="text-xs text-gray-500 truncate">
+                                        {user.email}
+                                    </div>
                                 </div>
-                            </div>
-                        </ResponsiveNavLink>
-
-                        <div className="mt-3 space-y-1">
+                            </ResponsiveNavLink>
+                            {/* Compact Logout Button */}
                             <ResponsiveNavLink
                                 method="post"
                                 href={route("logout")}
                                 as="button"
+                                className="flex items-center justify-center w-32 h-8 text-red-600 transition-colors duration-200 border border-red-200 rounded-full bg-red-50 hover:bg-red-100 group"
+                                title="Logout"
                             >
+                                <svg
+                                    className="w-4 h-4 transition-transform duration-200 group-hover:scale-110"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                                    />
+                                </svg>
                                 Logout
                             </ResponsiveNavLink>
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-2 pt-2 pb-3">
-                        <ResponsiveNavLink
-                            className="w-full"
-                            href={route("dashboard")}
-                            active={route().current("dashboard")}
-                        >
-                            Dashboard
-                        </ResponsiveNavLink>
-                        <ResponsiveNavLink
-                            className="w-full"
-                            href={route("master-user")}
-                            active={route().current("master-user")}
-                        >
-                            Master User
-                        </ResponsiveNavLink>
-                        <ResponsiveNavLink
-                            className="w-full"
-                            href={route("master-warehouse")}
-                            active={route().current("master-warehouse")}
-                        >
-                            Master Warehouse
-                        </ResponsiveNavLink>
-                        <ResponsiveNavLink
-                            className="w-full"
-                            href={route("master-supplier")}
-                            active={route().current("master-supplier")}
-                        >
-                            Master Supplier
-                        </ResponsiveNavLink>
-                        <ResponsiveNavLink
-                            className="w-full"
-                            href={route("master-product")}
-                            active={route().current("master-product")}
-                        >
-                            Master Product
-                        </ResponsiveNavLink>
-                        <ResponsiveNavLink
-                            className="w-full"
-                            href={route("manage-warehouse")}
-                            active={route().current("manage-warehouse")}
-                        >
-                            Manage Warehouse
-                        </ResponsiveNavLink>
-                        <ResponsiveNavLink
-                            className="w-full"
-                            href={route("incoming-good")}
-                            active={route().current("incoming-good")}
-                        >
-                            Incoming Good
-                        </ResponsiveNavLink>
-                        <ResponsiveNavLink
-                            className="w-full"
-                            href={route("stock-movement")}
-                            active={route().current("stock-movement")}
-                        >
-                            Stock Movement
-                        </ResponsiveNavLink>
-                        <ResponsiveNavLink
-                            className="w-full"
-                            href={route("stock-log")}
-                            active={route().current("stock-log")}
-                        >
-                            Stock Log
-                        </ResponsiveNavLink>
-                        <ResponsiveNavLink
-                            className="w-full"
-                            href={route("material-request")}
-                            active={route().current("material-request")}
-                        >
-                            Material Request
-                        </ResponsiveNavLink>
-                        <ResponsiveNavLink
-                            className="w-full"
-                            href={route("outgoing-good")}
-                            active={route().current("outgoing-good")}
-                        >
-                            Outgoing Good
-                        </ResponsiveNavLink>
-                        <ResponsiveNavLink
-                            className="w-full"
-                            href={route("return-transaction")}
-                            active={route().current("return-transaction")}
-                        >
-                            Return Transaction
-                        </ResponsiveNavLink>
-                        <ResponsiveNavLink
-                            className="w-full"
-                            href={route("stock-opname")}
-                            active={route().current("stock-opname")}
-                        >
-                            Stock Opname
-                        </ResponsiveNavLink>
-                        <ResponsiveNavLink
-                            className="w-full"
-                            href={route("report")}
-                            active={route().current("report")}
-                        >
-                            Report
-                        </ResponsiveNavLink>
+                    {/* Navigation Menu - Grid Layout (Original Style) */}
+                    <div className="p-4">
+                        <div className="grid grid-cols-2 gap-2">
+                            <ResponsiveNavLink
+                                href={route("dashboard")}
+                                active={route().current("dashboard")}
+                                className="block w-full px-2 py-3 text-sm font-medium text-center transition-colors duration-200 rounded-lg"
+                            >
+                                Dashboard
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink
+                                href={route("master-user")}
+                                active={route().current("master-user")}
+                                className="block w-full px-2 py-3 text-sm font-medium text-center transition-colors duration-200 rounded-lg"
+                            >
+                                Master User
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink
+                                href={route("master-warehouse")}
+                                active={route().current("master-warehouse")}
+                                className="block w-full px-2 py-3 text-sm font-medium text-center transition-colors duration-200 rounded-lg"
+                            >
+                                Master Warehouse
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink
+                                href={route("master-supplier")}
+                                active={route().current("master-supplier")}
+                                className="block w-full px-2 py-3 text-sm font-medium text-center transition-colors duration-200 rounded-lg"
+                            >
+                                Master Supplier
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink
+                                href={route("master-product")}
+                                active={route().current("master-product")}
+                                className="block w-full px-2 py-3 text-sm font-medium text-center transition-colors duration-200 rounded-lg"
+                            >
+                                Master Product
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink
+                                href={route("manage-warehouse")}
+                                active={route().current("manage-warehouse")}
+                                className="block w-full px-2 py-3 text-sm font-medium text-center transition-colors duration-200 rounded-lg"
+                            >
+                                Manage Warehouse
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink
+                                href={route("incoming-good")}
+                                active={route().current("incoming-good")}
+                                className="block w-full px-2 py-3 text-sm font-medium text-center transition-colors duration-200 rounded-lg"
+                            >
+                                Incoming Good
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink
+                                href={route("stock-movement")}
+                                active={route().current("stock-movement")}
+                                className="block w-full px-2 py-3 text-sm font-medium text-center transition-colors duration-200 rounded-lg"
+                            >
+                                Stock Movement
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink
+                                href={route("stock-log")}
+                                active={route().current("stock-log")}
+                                className="block w-full px-2 py-3 text-sm font-medium text-center transition-colors duration-200 rounded-lg"
+                            >
+                                Stock Log
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink
+                                href={route("material-request")}
+                                active={route().current("material-request")}
+                                className="block w-full px-2 py-3 text-sm font-medium text-center transition-colors duration-200 rounded-lg"
+                            >
+                                Material Request
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink
+                                href={route("outgoing-good")}
+                                active={route().current("outgoing-good")}
+                                className="block w-full px-2 py-3 text-sm font-medium text-center transition-colors duration-200 rounded-lg"
+                            >
+                                Outgoing Good
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink
+                                href={route("return-transaction")}
+                                active={route().current("return-transaction")}
+                                className="block w-full px-2 py-3 text-sm font-medium text-center transition-colors duration-200 rounded-lg"
+                            >
+                                Return Transaction
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink
+                                href={route("stock-opname")}
+                                active={route().current("stock-opname")}
+                                className="block w-full px-2 py-3 text-sm font-medium text-center transition-colors duration-200 rounded-lg"
+                            >
+                                Stock Opname
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink
+                                href={route("report")}
+                                active={route().current("report")}
+                                className="block w-full px-2 py-3 text-sm font-medium text-center transition-colors duration-200 rounded-lg"
+                            >
+                                Report
+                            </ResponsiveNavLink>
+                        </div>
                     </div>
                 </div>
             </nav>
 
-            {/* Sidebar + Main Content */}
-            <div className="flex">
-                {/* Sidebar */}
-                <Sidebar />
+            {/* Content Area - Flexible Height */}
+            <div className="flex flex-1 min-h-0">
+                {/* Sidebar - Hidden on mobile, visible on desktop */}
+                <div className="flex-shrink-0 hidden sm:block">
+                    <Sidebar />
+                </div>
 
-                {/* Main Content Area */}
-                <div className="flex-1 p-6">
-                    {/* <main className="p-6 bg-white rounded-lg shadow">
-                        
-                    </main> */}
-                    {children}
+                {/* Main Content Area - Scrollable */}
+                <div className="flex-1 min-w-0 overflow-hidden">
+                    <div className="h-full overflow-auto">
+                        <div className="p-3 sm:p-6">{children}</div>
+                    </div>
                 </div>
             </div>
         </div>
