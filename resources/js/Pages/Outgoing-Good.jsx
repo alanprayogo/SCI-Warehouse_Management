@@ -4,10 +4,10 @@ import { Head } from "@inertiajs/react";
 export default function Dashboard() {
     return (
         <AuthenticatedLayout>
-            <Head title="Dashboard" />
+            <Head title="Outgoing Goods" />
 
             <div className="w-full h-full p-6 text-gray-900 bg-white rounded-lg shadow">
-                You're logged in!
+                Outgoing Good Page
             </div>
         </AuthenticatedLayout>
     );

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('warehouse_id');
+            $table->string('rack_location')->nullable();
             $table->unsignedInteger('stock_quantity');
             $table->timestamps();
 

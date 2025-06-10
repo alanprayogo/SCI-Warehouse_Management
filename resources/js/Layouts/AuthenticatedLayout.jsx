@@ -1,36 +1,26 @@
-import ApplicationLogo from '@/Components/ApplicationLogo';
-import Dropdown from '@/Components/Dropdown';
-import NavLink from '@/Components/NavLink';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
-import { Link, usePage } from '@inertiajs/react';
-import { useState } from 'react';
+import Dropdown from "@/Components/Dropdown";
+import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
+import Sidebar from "@/Components/Sidebar";
+import { Link, usePage } from "@inertiajs/react";
+import { useState } from "react";
 
 export default function AuthenticatedLayout({ header, children }) {
     const user = usePage().props.auth.user;
-
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
 
     return (
         <div className="min-h-screen bg-gray-100">
-            <nav className="border-b border-gray-100 bg-white">
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div className="flex h-16 justify-between">
-                        <div className="flex">
-                            <div className="flex shrink-0 items-center">
-                                <Link href="/">
-                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
-                                </Link>
-                            </div>
-
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink
-                                    href={route('dashboard')}
-                                    active={route().current('dashboard')}
-                                >
-                                    Dashboard
-                                </NavLink>
-                            </div>
+            {/* Navbar Horizontal */}
+            <nav className="bg-white border-b border-gray-100">
+                <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+                    <div className="flex items-center justify-between h-16">
+                        <div className="flex items-center gap-20">
+                            <Link href="/">
+                                <h1 className="mb-4 text-2xl font-semibold text-gray-800">
+                                    SIMSCI
+                                </h1>
+                            </Link>
                         </div>
 
                         <div className="hidden sm:ms-6 sm:flex sm:items-center">
@@ -40,7 +30,7 @@ export default function AuthenticatedLayout({ header, children }) {
                                         <span className="inline-flex rounded-md">
                                             <button
                                                 type="button"
-                                                className="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
+                                                className="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white border border-transparent rounded-md hover:text-gray-700 focus:outline-none"
                                             >
                                                 {user.name}
 
@@ -62,12 +52,12 @@ export default function AuthenticatedLayout({ header, children }) {
 
                                     <Dropdown.Content>
                                         <Dropdown.Link
-                                            href={route('profile.edit')}
+                                            href={route("profile.edit")}
                                         >
                                             Profile
                                         </Dropdown.Link>
                                         <Dropdown.Link
-                                            href={route('logout')}
+                                            href={route("logout")}
                                             method="post"
                                             as="button"
                                         >
@@ -78,17 +68,18 @@ export default function AuthenticatedLayout({ header, children }) {
                             </div>
                         </div>
 
-                        <div className="-me-2 flex items-center sm:hidden">
+                        {/* Hamburger for mobile */}
+                        <div className="flex items-center -me-2 sm:hidden">
                             <button
                                 onClick={() =>
                                     setShowingNavigationDropdown(
-                                        (previousState) => !previousState,
+                                        (prev) => !prev
                                     )
                                 }
-                                className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none"
+                                className="inline-flex items-center justify-center p-2 text-gray-400 transition rounded-md hover:bg-gray-100 hover:text-gray-500"
                             >
                                 <svg
-                                    className="h-6 w-6"
+                                    className="w-6 h-6"
                                     stroke="currentColor"
                                     fill="none"
                                     viewBox="0 0 24 24"
@@ -96,8 +87,8 @@ export default function AuthenticatedLayout({ header, children }) {
                                     <path
                                         className={
                                             !showingNavigationDropdown
-                                                ? 'inline-flex'
-                                                : 'hidden'
+                                                ? "inline-flex"
+                                                : "hidden"
                                         }
                                         strokeLinecap="round"
                                         strokeLinejoin="round"
@@ -107,8 +98,8 @@ export default function AuthenticatedLayout({ header, children }) {
                                     <path
                                         className={
                                             showingNavigationDropdown
-                                                ? 'inline-flex'
-                                                : 'hidden'
+                                                ? "inline-flex"
+                                                : "hidden"
                                         }
                                         strokeLinecap="round"
                                         strokeLinejoin="round"
@@ -121,56 +112,59 @@ export default function AuthenticatedLayout({ header, children }) {
                     </div>
                 </div>
 
+                {/* Mobile Dropdown */}
                 <div
-                    className={
-                        (showingNavigationDropdown ? 'block' : 'hidden') +
-                        ' sm:hidden'
-                    }
+                    className={`${
+                        showingNavigationDropdown ? "block" : "hidden"
+                    } sm:hidden`}
                 >
-                    <div className="space-y-1 pb-3 pt-2">
+                    <div className="flex items-center justify-between pb-1 border-b border-gray-200 item">
+                        <ResponsiveNavLink href={route("profile.edit")}>
+                            <div className="px-5">
+                                <div className="text-base font-medium text-gray-800">
+                                    {user.name}
+                                </div>
+                                <div className="text-sm font-medium text-gray-500">
+                                    {user.email}
+                                </div>
+                            </div>
+                        </ResponsiveNavLink>
+
+                        <div className="mt-3 space-y-1">
+                            <ResponsiveNavLink
+                                method="post"
+                                href={route("logout")}
+                                as="button"
+                            >
+                                Logout
+                            </ResponsiveNavLink>
+                        </div>
+                    </div>
+
+                    <div className="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink
-                            href={route('dashboard')}
-                            active={route().current('dashboard')}
+                            href={route("dashboard")}
+                            active={route().current("dashboard")}
                         >
                             Dashboard
                         </ResponsiveNavLink>
                     </div>
-
-                    <div className="border-t border-gray-200 pb-1 pt-4">
-                        <div className="px-4">
-                            <div className="text-base font-medium text-gray-800">
-                                {user.name}
-                            </div>
-                            <div className="text-sm font-medium text-gray-500">
-                                {user.email}
-                            </div>
-                        </div>
-
-                        <div className="mt-3 space-y-1">
-                            <ResponsiveNavLink href={route('profile.edit')}>
-                                Profile
-                            </ResponsiveNavLink>
-                            <ResponsiveNavLink
-                                method="post"
-                                href={route('logout')}
-                                as="button"
-                            >
-                                Log Out
-                            </ResponsiveNavLink>
-                        </div>
-                    </div>
                 </div>
             </nav>
 
-            {header && (
-                <header className="bg-white shadow">
-                    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                        {header}
-                    </div>
-                </header>
-            )}
+            {/* Sidebar + Main Content */}
+            <div className="flex">
+                {/* Sidebar */}
+                <Sidebar />
 
-            <main>{children}</main>
+                {/* Main Content Area */}
+                <div className="flex-1 p-6">
+                    {/* <main className="p-6 bg-white rounded-lg shadow">
+                        
+                    </main> */}
+                    {children}
+                </div>
+            </div>
         </div>
     );
 }

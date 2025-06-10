@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('stock_movements', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('product_id');
+            $table->string('from_rack_location')->nullable();
+            $table->string('to_rack_location')->nullable();
             $table->unsignedBigInteger('from_warehouse_id')->nullable();
             $table->unsignedBigInteger('to_warehouse_id')->nullable();
             $table->unsignedInteger('stock_movement_quantity');
