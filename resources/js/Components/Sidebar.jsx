@@ -76,7 +76,7 @@ export default function Sidebar() {
     ];
 
     return (
-        <aside className="flex-col hidden h-screen bg-white border-r shadow-sm lg:flex">
+        <aside className="flex-col hidden h-screen bg-white border-r shadow-sm md:flex">
             <nav className="flex-1 px-4 py-4 space-y-2 overflow-y-auto">
                 {menuItems.map((item) => (
                     <a

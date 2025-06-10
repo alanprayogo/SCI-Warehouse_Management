@@ -120,7 +120,7 @@ export default function AuthenticatedLayout({ header, children }) {
                 >
                     <div className="flex items-center justify-between pb-1 border-b border-gray-200 item">
                         <ResponsiveNavLink href={route("profile.edit")}>
-                            <div className="px-5">
+                            <div className="">
                                 <div className="text-base font-medium text-gray-800">
                                     {user.name}
                                 </div>
@@ -141,12 +141,104 @@ export default function AuthenticatedLayout({ header, children }) {
                         </div>
                     </div>
 
-                    <div className="pt-2 pb-3 space-y-1">
+                    <div className="grid grid-cols-2 gap-2 pt-2 pb-3">
                         <ResponsiveNavLink
+                            className="w-full"
                             href={route("dashboard")}
                             active={route().current("dashboard")}
                         >
                             Dashboard
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            className="w-full"
+                            href={route("master-user")}
+                            active={route().current("master-user")}
+                        >
+                            Master User
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            className="w-full"
+                            href={route("master-warehouse")}
+                            active={route().current("master-warehouse")}
+                        >
+                            Master Warehouse
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            className="w-full"
+                            href={route("master-supplier")}
+                            active={route().current("master-supplier")}
+                        >
+                            Master Supplier
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            className="w-full"
+                            href={route("master-product")}
+                            active={route().current("master-product")}
+                        >
+                            Master Product
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            className="w-full"
+                            href={route("manage-warehouse")}
+                            active={route().current("manage-warehouse")}
+                        >
+                            Manage Warehouse
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            className="w-full"
+                            href={route("incoming-good")}
+                            active={route().current("incoming-good")}
+                        >
+                            Incoming Good
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            className="w-full"
+                            href={route("stock-movement")}
+                            active={route().current("stock-movement")}
+                        >
+                            Stock Movement
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            className="w-full"
+                            href={route("stock-log")}
+                            active={route().current("stock-log")}
+                        >
+                            Stock Log
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            className="w-full"
+                            href={route("material-request")}
+                            active={route().current("material-request")}
+                        >
+                            Material Request
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            className="w-full"
+                            href={route("outgoing-good")}
+                            active={route().current("outgoing-good")}
+                        >
+                            Outgoing Good
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            className="w-full"
+                            href={route("return-transaction")}
+                            active={route().current("return-transaction")}
+                        >
+                            Return Transaction
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            className="w-full"
+                            href={route("stock-opname")}
+                            active={route().current("stock-opname")}
+                        >
+                            Stock Opname
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            className="w-full"
+                            href={route("report")}
+                            active={route().current("report")}
+                        >
+                            Report
                         </ResponsiveNavLink>
                     </div>
                 </div>
